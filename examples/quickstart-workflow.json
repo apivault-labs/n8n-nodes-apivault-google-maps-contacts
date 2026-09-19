@@ -1,0 +1,99 @@
+{
+  "id": "0190a858-23fe-5d4b-806f-9c08a0de0e4d",
+  "name": "Google Maps Contacts → Local CRM leads",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "dd6ea234-2bdb-5ff4-a429-bcb9fb0a975d",
+      "name": "When clicking Execute workflow",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Setup\n1. Select your Apify API credential.\n2. Choose a country, city and business category.\n3. Adjust the contact and quality filters.\n4. Send reviewed rows to your CRM.",
+        "height": 300,
+        "width": 460
+      },
+      "id": "1d8cf790-aaa2-5e9c-940b-a82bea6e8f21",
+      "name": "How to use this workflow",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -40,
+        -240
+      ]
+    },
+    {
+      "parameters": {
+        "country": "us",
+        "city": "Austin",
+        "categories": "plumber",
+        "websiteFilter": "any",
+        "enrich": true,
+        "enrichmentMode": "contacts",
+        "verifyEmails": true,
+        "requireEmail": false,
+        "maxResults": 100,
+        "fastMode": false
+      },
+      "id": "9a0f9aa3-a43d-5527-b868-d55ad9ad5db2",
+      "name": "Find local businesses",
+      "type": "n8n-nodes-apivault-google-maps-contacts.googleMapsContacts",
+      "typeVersion": 1,
+      "position": [
+        260,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const j = $json; const email = j.email ?? j.primaryEmail ?? (Array.isArray(j.emails) ? j.emails[0] : ''); return { json: { ...j, crmLead: { businessName: j.title ?? j.name ?? j.businessName ?? '', website: j.website ?? '', email, phone: j.phone ?? j.phoneNumber ?? '', address: j.address ?? '', reviewStatus: email || j.phone || j.phoneNumber ? 'ready_for_review' : 'needs_contact' } } };"
+      },
+      "id": "92daffa2-5473-5ec2-8054-34d328cf396d",
+      "name": "Prepare local CRM lead",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        580,
+        120
+      ]
+    }
+  ],
+  "connections": {
+    "When clicking Execute workflow": {
+      "main": [
+        [
+          {
+            "node": "Find local businesses",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find local businesses": {
+      "main": [
+        [
+          {
+            "node": "Prepare local CRM lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "00173c9a-328d-5462-8839-a2d12d60e4fe",
+  "tags": []
+}
