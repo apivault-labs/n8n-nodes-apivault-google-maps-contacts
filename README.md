@@ -22,3 +22,15 @@ Runs use the hosted [Google Maps Contacts Actor](https://apify.com/apivault_labs
 ## License
 
 [MIT](LICENSE)
+
+<!-- apivault-integrations:start -->
+## Hosted Actor and integrations
+
+- [Run Google Maps Scraper — Business Emails & Phones API on Apify](https://apify.com/apivault_labs/google-maps-scraper-emails-contact-details-leads).
+- [Current pricing and usage terms](https://apify.com/apivault_labs/google-maps-scraper-emails-contact-details-leads/pricing).
+- [n8n community package: n8n-nodes-apivault-google-maps-contacts](https://www.npmjs.com/package/n8n-nodes-apivault-google-maps-contacts).
+- [Python client](https://github.com/apivault-labs/apivault-labs/tree/main/python-clients/apivault-google-maps-scraper-emails-contact-details-leads).
+- [n8n source and usage](https://github.com/apivault-labs/apivault-labs/tree/main/community-nodes/n8n-nodes-apivault-google-maps-contacts).
+
+An Apify account and API token are required. Hosted Actor/platform charges apply. npm publication is not n8n verification or confirmation of n8n Cloud availability.
+<!-- apivault-integrations:end -->
